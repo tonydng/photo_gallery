@@ -1,5 +1,6 @@
 class GalleriesController < ApplicationController
   before_filter :set_gallery, except: [:index, :new, :create]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_gallery
 
   # GET /galleries
   # GET /galleries.json
@@ -93,5 +94,11 @@ class GalleriesController < ApplicationController
 
     def gallery_params
       params.require(:gallery).permit(:name, :description)
+    end
+
+    def invalid_gallery
+      logger.error "Attempt to access invalid gallery #{params[:id]}"
+      flash[:error] = "The gallery you were looking for could not be found."
+      redirect_to galleries_url
     end
 end
