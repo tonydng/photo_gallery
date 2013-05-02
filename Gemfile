@@ -8,6 +8,7 @@ gem 'less-rails', '2.3.3'
 gem 'twitter-bootstrap-rails', '2.2.6'
 gem 'simple_form', '2.1.0'
 gem 'bootstrap-sass', '2.3.0.1'
+
 group :development, :test do 
   gem 'sqlite3', '1.3.7'
   gem 'rspec-rails', '2.13.0'
@@ -16,6 +17,8 @@ end
 group :test do 
   gem 'selenium-webdriver', '2.0'
   gem 'capybara', '2.1.0.beta1'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'factory_girl', '4.2.0'
 end
 
 group :production do 

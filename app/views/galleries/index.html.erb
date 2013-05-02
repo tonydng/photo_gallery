@@ -12,7 +12,7 @@
   <tbody>
     <% @galleries.each do |gallery| %>
       <tr>
-        <td><%= gallery.name %></td>
+        <td><%= link_to gallery.name, gallery %></td>
         <td><%= gallery.description %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
