@@ -1,4 +1,6 @@
 class GalleriesController < ApplicationController
+  before_filter :set_gallery, except: [:index, :new, :create]
+
   # GET /galleries
   # GET /galleries.json
   def index
@@ -13,7 +15,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.json
   def show
-    @gallery = Gallery.find(params[:id])
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +36,6 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/1/edit
   def edit
-    @gallery = Gallery.find(params[:id])
   end
 
   # POST /galleries
@@ -58,7 +59,6 @@ class GalleriesController < ApplicationController
   # PUT /galleries/1
   # PUT /galleries/1.json
   def update
-    @gallery = Gallery.find(params[:id])
 
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
@@ -74,7 +74,6 @@ class GalleriesController < ApplicationController
   # DELETE /galleries/1
   # DELETE /galleries/1.json
   def destroy
-    @gallery = Gallery.find(params[:id])
     @gallery.destroy
 
     respond_to do |format|
@@ -82,4 +81,10 @@ class GalleriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def set_gallery
+      @gallery = Gallery.find(params[:id])
+    end
 end
