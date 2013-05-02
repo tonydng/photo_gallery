@@ -44,10 +44,11 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
+        format.html { redirect_to @gallery, 
+          notice: 'Gallery has been created.' }
         format.json { render json: @gallery, status: :created, location: @gallery }
       else
-        flash[:error] = "Gallery has not been created."
+        flash.now[:error] = "Gallery has not been created."
         format.html { render action: "new" }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
       end
