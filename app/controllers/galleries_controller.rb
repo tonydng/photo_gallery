@@ -62,9 +62,11 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.update_attributes(gallery_params)
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
+        format.html { redirect_to @gallery, 
+          notice: 'Gallery has been updated.' }
         format.json { head :no_content }
       else
+        flash.now[:error] = "Gallery has not been updated."
         format.html { render action: "edit" }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
       end
