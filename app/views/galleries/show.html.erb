@@ -16,7 +16,7 @@
               galleries_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit gallery")),
               edit_gallery_path(@gallery), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.remove gallery")),
+  <%= link_to t('.destroy', :default => t("helpers.links.delete gallery")),
               gallery_path(@gallery),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },

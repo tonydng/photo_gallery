@@ -45,8 +45,8 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to @gallery, 
-          notice: 'Gallery has been created.' }
+        flash[:success] = 'Gallery has been created.'
+        format.html { redirect_to @gallery }
         format.json { render json: @gallery, status: :created, location: @gallery }
       else
         flash.now[:error] = "Gallery has not been created."
@@ -62,8 +62,8 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.update_attributes(gallery_params)
-        format.html { redirect_to @gallery, 
-          notice: 'Gallery has been updated.' }
+        flash[:success] = 'Gallery has been updated.'
+        format.html { redirect_to @gallery }
         format.json { head :no_content }
       else
         flash.now[:error] = "Gallery has not been updated."
@@ -77,6 +77,7 @@ class GalleriesController < ApplicationController
   # DELETE /galleries/1.json
   def destroy
     @gallery.destroy
+    flash[:success] = "Gallery has been destroyed." 
 
     respond_to do |format|
       format.html { redirect_to galleries_url }
