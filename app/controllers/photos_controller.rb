@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
     @photo.destroy
     flash[:success] = "Photo has been deleted."
     respond_to do |format|
-      format.html { redirect_to gallery_url }
+      format.html { redirect_to @gallery }
       format.json { head :no_content }
     end
   end
@@ -57,6 +57,6 @@ class PhotosController < ApplicationController
     end
 
     def photo_params
-      params.require(:photo).permit(:name)
+      params.require(:photo).permit(:gallery_id, :name, :image, :remote_image_url)
     end
 end

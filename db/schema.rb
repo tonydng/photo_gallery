@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502202654) do
+ActiveRecord::Schema.define(:version => 20130503124425) do
 
   create_table "galleries", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130502202654) do
     t.integer  "gallery_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "image"
   end
 
   add_index "photos", ["gallery_id"], :name => "index_photos_on_gallery_id"
