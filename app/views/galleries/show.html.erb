@@ -19,7 +19,7 @@
         <%= photo.name %>
       </div>
       <div class="actions">
-        <%= link_to "edit", [@gallery, photo] %> |
+        <%= link_to "edit", [:edit, @gallery, photo] %> |
         <%= link_to "remove", [@gallery, photo], confirm: "You sure?", method: :delete %>
       </div>
     </div>
