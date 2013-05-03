@@ -7,10 +7,11 @@ feature "Deleting photos" do
   before do 
     visit root_path
     click_link gallery.name 
+    click_link photo.name
   end
 
   scenario "Deleting a photo" do 
-    click_link "remove"
+    click_link "Delete Photo"
 
     expect(page).to have_content("Photo has been deleted.")
     expect(page.current_url).to eql(gallery_url(gallery))

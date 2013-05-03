@@ -12,20 +12,16 @@
 </dl>
 
 <div id="photos">
+  <ul class="thumbnails">
   <% for photo in @gallery.photos %>
-    <div class="photo">
-      <%= link_to image_tag(photo.image_url(:thumb).to_s), 
-                                          photo.image_url.to_s %>
-      <div class="name">
-        <%= photo.name %>
+    <li class="span2">
+      <div class="thumbnail">
+        <h4><%= link_to photo.name, [@gallery, photo] %></h4>
+        <%= image_tag photo.image_url(:thumb).to_s %>
       </div>
-      <div class="actions">
-        <%= link_to "edit", [:edit, @gallery, photo] %> |
-        <%= link_to "remove", [@gallery, photo], confirm: "You sure?", method: :delete %>
-      </div>
-    </div>
+    </li>
   <% end %>
-  <div class="clear"></div>
+  </ul>
 </div>
 
 <div class="form-actions">

@@ -21,6 +21,9 @@ class PhotosController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
   end
 

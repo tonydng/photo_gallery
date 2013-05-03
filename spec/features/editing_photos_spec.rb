@@ -7,7 +7,8 @@ feature "Editing photos" do
   before do 
     visit root_path
     click_link gallery.name
-    click_link "edit"
+    click_link photo.name
+    click_link "Edit Photo"
   end
 
   scenario "Updating a photo" do 
