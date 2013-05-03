@@ -11,8 +11,8 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.save
         flash[:success] = 'Photo has been created.'
-        format.html { redirect_to @photo.gallery }
-        format.json { render json: @photo.gallery, status: :created, location: @gallery }
+        format.html { redirect_to @gallery }
+        format.json { render json: @gallery, status: :created, location: @gallery }
       else
         flash.now[:error] = "Photo has not been created."
         format.html { render action: "new" }
