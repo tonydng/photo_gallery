@@ -1,0 +1,9 @@
+<%= simple_form_for [@gallery, @photo], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.hidden_field :gallery_id %>
+  <%= f.input :name %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                @gallery, :class => 'btn' %>
+  </div>
+<% end %>

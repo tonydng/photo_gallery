@@ -11,9 +11,27 @@
   <dd><%= @gallery.description %></dd>
 </dl>
 
+<div id="photos">
+  <% for photo in @gallery.photos %>
+    <div class="photo">
+      <div class="image_placeholder"></div>
+      <div class="name">
+        <%= photo.name %>
+      </div>
+      <div class="actions">
+        <%= link_to "edit", [@gallery, photo] %> |
+        <%= link_to "remove", [@gallery, photo], confirm: "You sure?", method: :delete %>
+      </div>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+
 <div class="form-actions">
+  <%= link_to "Add a photo",
+              new_gallery_photo_path(@gallery), :class => 'btn' %>
   <%= link_to t('.back', :default => t("helpers.links.view galleries")),
-              galleries_path, :class => 'btn'  %>
+              galleries_path, :class => 'btn btn-primary'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit gallery")),
               edit_gallery_path(@gallery), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.delete gallery")),

@@ -5,18 +5,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><h4><%= model_class.human_attribute_name(:name) %></h4></th>
+      <th><h4><%= model_class.human_attribute_name(:photos) %></h4></th>
+      <th><h4><%= model_class.human_attribute_name(:description) %></h4></th>
     </tr>
   </thead>
   <tbody>
     <% @galleries.each do |gallery| %>
       <tr>
         <td><%= link_to gallery.name, gallery %></td>
+        <td><%= gallery.photos.size %></td>
         <td><%= gallery.description %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "New Gallery", new_gallery_path, class:'btn btn-primary' %>
+<%= link_to "New Gallery", new_gallery_path, class:'btn btn-large btn-primary' %>
