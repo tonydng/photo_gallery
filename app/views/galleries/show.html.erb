@@ -1,5 +1,5 @@
 <% title(@gallery.name, "Galleries") %>
-<h1>Photo Gallery</h1>
+<h1><%= @gallery.name  %></h1>
 
 <div id="photos">
   <% for photo in @gallery.photos %>
