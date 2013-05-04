@@ -12,8 +12,9 @@ gem 'strong_parameters', '0.2.0'
 gem 'carrierwave'
 gem 'rmagick', '2.13.2'
 gem 'fog', '1.10.1'
-gem 'carrierwave_direct'
-gem 'sidekiq'
+gem 'devise', '2.2.3'
+# gem 'carrierwave_direct'
+# gem 'sidekiq'
 
 group :development, :test do 
   gem 'sqlite3', '1.3.7'
