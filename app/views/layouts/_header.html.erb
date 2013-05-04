@@ -9,9 +9,13 @@
       <%= link_to "Photo Gallery", root_path, class: "brand" %>
       <div class="container nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Sign in", "#"  %></li>
-          <li><%= link_to "Sign out", "#"  %></li>
-          <li><%= link_to "About", "#"  %></li>
+          <li><%= link_to "About", about_path  %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+          <% end %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
