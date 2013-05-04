@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Creating Galleries' do 
+feature 'Creating Photos' do 
   scenario 'can create a gallery' do 
     visit root_path
     click_link "New Gallery"

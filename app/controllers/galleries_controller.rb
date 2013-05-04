@@ -1,7 +1,6 @@
 class GalleriesController < ApplicationController
   before_filter :set_gallery, except: [:index, :new, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_gallery
-
   # GET /galleries
   # GET /galleries.json
   def index
@@ -16,7 +15,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.json
   def show
-    
+    # @photo = @gallery.photos.build
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @gallery }
@@ -45,7 +44,7 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        flash[:success] = 'Gallery has been created.'
+        flash[:success] = "Gallery has been created."
         format.html { redirect_to @gallery }
         format.json { render json: @gallery, status: :created, location: @gallery }
       else
@@ -56,13 +55,13 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # PUT /galleries/1
-  # PUT /galleries/1.json
+  # PATCH/PUT /galleries/1
+  # PATCH/PUT /galleries/1.json
   def update
 
     respond_to do |format|
       if @gallery.update_attributes(gallery_params)
-        flash[:success] = 'Gallery has been updated.'
+        flash[:success] = "Gallery has been updated."
         format.html { redirect_to @gallery }
         format.json { head :no_content }
       else
@@ -77,8 +76,7 @@ class GalleriesController < ApplicationController
   # DELETE /galleries/1.json
   def destroy
     @gallery.destroy
-    flash[:success] = "Gallery has been destroyed." 
-
+    flash[:success] = "Gallery has been destroyed."
     respond_to do |format|
       format.html { redirect_to galleries_url }
       format.json { head :no_content }
@@ -86,18 +84,20 @@ class GalleriesController < ApplicationController
   end
 
   private
-
     def set_gallery
       @gallery = Gallery.find(params[:id])
     end
-
+    # Use this method to whitelist the permissible parameters. Example:
+    # params.require(:person).permit(:name, :age)
+    # Also, you can specialize this method with per-user checking of permissible attributes.
     def gallery_params
-      params.require(:gallery).permit(:name, :description)
+      params.require(:gallery).permit(:name)
     end
 
     def invalid_gallery
       logger.error "Attempt to access invalid gallery #{params[:id]}"
-      flash[:error] = "The gallery you were looking for could not be found."
-      redirect_to galleries_url
+      flash[:error] = "The gallery you try getting could not be found."
+      redirect_to galleries_path
     end
+  
 end

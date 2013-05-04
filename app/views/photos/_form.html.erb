@@ -1,11 +1,9 @@
-<%= simple_form_for [@gallery, @photo], :html => { :multipart => true, :class => 'form-horizontal' } do |f| %>
-  <%= f.hidden_field :gallery_id %>
+<%= simple_form_for [@gallery, @photo], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :name %>
   <%= f.input :image %>
-  <%= f.input :remote_image_url %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.back to gallery', :default => t("helpers.links.back to gallery")),
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 @gallery, :class => 'btn' %>
   </div>
 <% end %>

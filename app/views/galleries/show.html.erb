@@ -1,37 +1,23 @@
-<%- model_class = Gallery -%>
-<div class="page-header">
-  <% title(@gallery.name, "Galleries") %>
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @gallery.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @gallery.description %></dd>
-</dl>
+<% title(@gallery.name, "Galleries") %>
+<h1>Photo Gallery</h1>
 
 <div id="photos">
-  <ul class="thumbnails">
   <% for photo in @gallery.photos %>
-    <li class="span2">
-      <div class="thumbnail">
-        <h4><%= link_to photo.name, [@gallery, photo] %></h4>
-        <%= image_tag photo.image_url(:thumb).to_s %>
-      </div>
-    </li>
+    <div class="photo">
+      <%= link_to image_tag(photo.image_url(:thumb)), [@gallery, photo] if photo.image? %>
+      <div class="name"><%= link_to photo.name, [@gallery, photo] if !photo.name.nil? %></div>
+    </div>
   <% end %>
-  </ul>
+  <div class="clear"></div>
 </div>
 
 <div class="form-actions">
-  <%= link_to "Add a photo",
-              new_gallery_photo_path(@gallery), :class => 'btn' %>
-  <%= link_to t('.back', :default => t("helpers.links.view galleries")),
-              galleries_path, :class => 'btn btn-primary'  %>
+  <%= link_to "Add a photo", new_gallery_photo_path(@gallery), :class => 'btn'  %>
+  <%= link_to t('.back', :default => t("helpers.links.List Galleries")),
+              galleries_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit gallery")),
               edit_gallery_path(@gallery), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.delete gallery")),
+  <%= link_to t('.delete gallery', :default => t("helpers.links.delete gallery")),
               gallery_path(@gallery),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },

@@ -1,18 +1,10 @@
-<%- model_class = Photo -%>
-<div class="page-header">
-  <% title(@photo.name, "Galleries") %>
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
+<h1><%= @photo.name %></h1>
 
-<dl class="dl-horizontal">
-  <dd><h3><%= @photo.name %></h3></dd>
-</dl>
-
-<%= image_tag @photo.image_url.to_s %>
+<%= image_tag @photo.image_url %>
 
 <div class="form-actions">
-  <%= link_to t('.back to gallery', :default => t("helpers.links.back to gallery")),
-              @gallery, :class => 'btn btn-primary'  %>
+  <%= link_to t('.back', :default => t("helpers.links.back to gallery")),
+              @gallery, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit photo")),
               [:edit, @gallery, @photo], :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.delete photo")),

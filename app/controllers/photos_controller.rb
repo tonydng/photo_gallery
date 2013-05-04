@@ -1,18 +1,51 @@
 class PhotosController < ApplicationController
   before_filter :set_gallery
   before_filter :set_photo, except: [:index, :new, :create]
+  # GET /photos
+  # GET /photos.json
+  def index
+    @photos = @gallery.photos.order("id ASC")
 
-  def new
-    @photo = @gallery.photos.build
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @photos }
+    end
   end
 
-  def create 
+  # GET /photos/1
+  # GET /photos/1.json
+  def show
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @photo }
+    end
+  end
+
+  # GET /photos/new
+  # GET /photos/new.json
+  def new
+    @photo = @gallery.photos.build
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @photo }
+    end
+  end
+
+  # GET /photos/1/edit
+  def edit
+  end
+
+  # POST /photos
+  # POST /photos.json
+  def create
     @photo = @gallery.photos.build(photo_params)
     respond_to do |format|
       if @photo.save
-        flash[:success] = 'Photo has been created.'
+        flash[:success] = "Photo has been created."
         format.html { redirect_to @gallery }
-        format.json { render json: @gallery, status: :created, location: @gallery }
+        format.json { render json: @gallery, status: :created, location: @photo }
       else
         flash.now[:error] = "Photo has not been created."
         format.html { render action: "new" }
@@ -21,26 +54,25 @@ class PhotosController < ApplicationController
     end
   end
 
-  def show
-  end
-
-  def edit
-  end
-
+  # PATCH/PUT /photos/1
+  # PATCH/PUT /photos/1.json
   def update
+
     respond_to do |format|
       if @photo.update_attributes(photo_params)
-        flash[:success] = 'Photo has been updated.'
-        format.html { redirect_to @photo.gallery }
-        format.json { render json: @photo.gallery, status: :created, location: @gallery }
+        flash[:success] = "Photo has been updated."
+        format.html { redirect_to @gallery }
+        format.json { head :no_content }
       else
-        flash.now[:error] = "Photo has not been updated."
+        flash[:error] = "Photo has not been updated."
         format.html { render action: "edit" }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  # DELETE /photos/1
+  # DELETE /photos/1.json
   def destroy
     @photo.destroy
     flash[:success] = "Photo has been deleted."
@@ -58,8 +90,10 @@ class PhotosController < ApplicationController
     def set_photo
       @photo = @gallery.photos.find(params[:id])
     end
-
+    # Use this method to whitelist the permissible parameters. Example:
+    # params.require(:person).permit(:name, :age)
+    # Also, you can specialize this method with per-user checking of permissible attributes.
     def photo_params
-      params.require(:photo).permit(:gallery_id, :name, :image, :remote_image_url)
+      params.require(:photo).permit(:galery_id, :image, :name)
     end
 end

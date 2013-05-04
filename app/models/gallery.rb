@@ -1,5 +1,5 @@
 class Gallery < ActiveRecord::Base
-  # attr_accessible :description, :name
+  # attr_accessible :name
   validates :name, presence: true
   has_many :photos, dependent: :delete_all
 end
