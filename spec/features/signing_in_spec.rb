@@ -12,4 +12,15 @@ feature "Signing in" do
 		expect(page).to have_content(message)
 		expect(page).to have_content("Signed in as #{@user.name} (#{@user.email})")
 	end
+
+	scenario "Signing in via form" do 
+		User.find_by_email("user@example.com").confirm!
+		visit root_path
+		click_link 'Sign in'
+		fill_in "Email", with: "user@example.com"
+		fill_in "Password", with: "password"
+		click_button "Sign in"
+		expect(page).to have_content("Signed in successfully.")
+		expect(page).to have_content("Signed in as #{@user.name} (#{@user.email})")
+	end
 end

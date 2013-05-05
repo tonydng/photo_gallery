@@ -12,4 +12,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates :name, presence: true
+
+  has_many :galleries, dependent: :destroy
+  has_many :photos, dependent: :destroy
 end

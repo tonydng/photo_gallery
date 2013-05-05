@@ -1,6 +1,8 @@
 class GalleriesController < ApplicationController
+  before_filter :authenticate_user!, except: [:index, :show]
   before_filter :set_gallery, except: [:index, :new, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_gallery
+  before_filter :correct_user, only: [:create, :edit, :update, :destroy]
   # GET /galleries
   # GET /galleries.json
   def index
@@ -41,7 +43,7 @@ class GalleriesController < ApplicationController
   # POST /galleries.json
   def create
     @gallery = Gallery.new(gallery_params)
-
+    @gallery.user = current_user
     respond_to do |format|
       if @gallery.save
         flash[:success] = "Gallery has been created."
@@ -98,6 +100,13 @@ class GalleriesController < ApplicationController
       logger.error "Attempt to access invalid gallery #{params[:id]}"
       flash[:error] = "The gallery you try getting could not be found."
       redirect_to galleries_path
+    end
+
+    def correct_user
+      unless @gallery.user == current_user
+        flash[:error] = "You are not authorized to do this."
+        redirect_to root_path
+      end
     end
   
 end

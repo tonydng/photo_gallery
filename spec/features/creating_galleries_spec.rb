@@ -1,9 +1,16 @@
 require 'spec_helper'
 
 feature 'Creating Photos' do 
-  scenario 'can create a gallery' do 
+  
+  before do 
+    # user = Factory(:user) 
+    user.confirm!
+    sign_in_as!(user)
     visit root_path
     click_link "New Gallery"
+  end
+  scenario 'can create a gallery' do 
+
     fill_in 'Name', with: 'Last vacation'
     fill_in "Description",  with: 'nice photos of last vacation'
     click_button 'Create Gallery'

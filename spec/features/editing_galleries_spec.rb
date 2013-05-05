@@ -3,7 +3,13 @@ require 'spec_helper'
 feature "Editing Galleries" do 
 
   before do 
-    FactoryGirl.create(:gallery, name: "Last vacation")
+    gallery = FactoryGirl.create(:gallery, name: "Last vacation") 
+    user = FactoryGirl.create(:user)
+    user.confirm!
+    gallery.update_attribute(:user, user)
+
+    sign_in_as!(user)
+
     visit root_path
     click_link "Last vacation"
     click_link 'Edit Gallery'
