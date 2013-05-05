@@ -26,6 +26,7 @@ group :test do
   gem 'capybara', '2.1.0.beta1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'factory_girl', '4.2.0'
+  gem 'email_spec', '1.4.0'
 end
 
 group :production do 

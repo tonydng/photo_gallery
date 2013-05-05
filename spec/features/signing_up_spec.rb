@@ -9,6 +9,7 @@ feature 'Signing up' do
     fill_in "Password", with: "password"
     fill_in "Confirmation", with: "password"
     click_button "Sign up"
-    expect(page).to have_content("You have signed up successfully.")
+    message = "Please open the link to activate your account."
+    expect(page).to have_content(message)
   end
 end
