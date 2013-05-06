@@ -1,11 +1,19 @@
 PhotoGallery::Application.routes.draw do 
+
+  namespace :admin do 
+    root to: 'base#index'
+    resources :users
+  end
+
   devise_for :users, :controllers => {:registrations => "users/registrations", 
                                       :passwords => "users/passwords"}
 
   root to: 'galleries#index'
   match '/about', to: 'pages#about'
   resources :galleries do 
-    resources :photos
+    resources :photos do 
+      resources :comments
+    end
   end  
   
   # The priority is based upon order of creation:

@@ -7,7 +7,7 @@ feature 'Creating Photos' do
     sign_in_as!(user)
     visit root_path
     click_link gallery.name 
-    click_link "Add a photo"
+    click_link "Add A Photo"
   end
 
   scenario "Creating a photo" do 

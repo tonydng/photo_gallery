@@ -43,4 +43,6 @@ RSpec.configure do |config|
   config.before do 
     ActionMailer::Base.deliveries.clear
   end
+
+  config.include Devise::TestHelpers, type: :controller
 end
