@@ -1,5 +1,5 @@
 <h1><%= @photo.name %></h1>
-<h5>Created by: <%= @photo.user.name %> (<%= @photo.user.email %>)</h5>
+<h5>Created by: <%= @photo.gallery.user.name %> (<%= @photo.gallery.user.email %>)</h5>
 
 <%= image_tag @photo.image_url %>
 

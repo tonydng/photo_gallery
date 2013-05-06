@@ -2,7 +2,7 @@ class GalleriesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :set_gallery, except: [:index, :new, :create]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_gallery
-  before_filter :correct_user, only: [:create, :edit, :update, :destroy]
+  before_filter :correct_user, only: [:edit, :update, :destroy]
   # GET /galleries
   # GET /galleries.json
   def index
@@ -27,7 +27,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/new
   # GET /galleries/new.json
   def new
-    @gallery = Gallery.new
+    @gallery = current_user.galleries.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,8 +42,8 @@ class GalleriesController < ApplicationController
   # POST /galleries
   # POST /galleries.json
   def create
-    @gallery = Gallery.new(gallery_params)
-    @gallery.user = current_user
+    @gallery = current_user.galleries.build(gallery_params)
+    # @gallery.user = current_user
     respond_to do |format|
       if @gallery.save
         flash[:success] = "Gallery has been created."
@@ -93,7 +93,7 @@ class GalleriesController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def gallery_params
-      params.require(:gallery).permit(:name)
+      params.require(:gallery).permit(:name, :description, :user)
     end
 
     def invalid_gallery

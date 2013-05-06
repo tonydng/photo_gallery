@@ -43,8 +43,6 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = @gallery.photos.build(photo_params)
-    @photo.user = current_user
-    @phto.gallery.user = current_user
     respond_to do |format|
       if @photo.save
         flash[:success] = "Photo has been created."
@@ -98,14 +96,13 @@ class PhotosController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def photo_params
-      params.require(:photo).permit(:galery_id, :image, :name)
+      params.require(:photo).permit(:galery, :image, :name, :user)
     end
 
     def correct_user
-
-      if @photo.user != current_user 
+      unless @gallery.user == current_user
         flash[:error] = "You are not authorized to do this."
-        redirect_to root_path
+        redirect_to @gallery
       end
     end
 end
