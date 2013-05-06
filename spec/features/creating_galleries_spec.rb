@@ -1,10 +1,8 @@
 require 'spec_helper'
 
 feature 'Creating Photos' do 
-  
+  let!(:user) { Factory(:confirmed_user) }
   before do 
-    # user = Factory(:user) 
-    user.confirm!
     sign_in_as!(user)
     visit root_path
     click_link "New Gallery"

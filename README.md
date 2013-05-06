@@ -40,5 +40,19 @@ end
 <p>$ heroku config:add AWS_ACCESS_KEY_ID=your_access_key_id</p>
 <p>$ heroku config:add AWS_SECRET_ACCESS_KEY=your_secret_access_key</p>
 
+<h3>Setup SMTP Gmail on Heroku:</h3>
+<p>Create mail.rb in /config/initializes/mail.rb:</p>
+<pre>
+ActionMailer::Base.smtp_settings = { 
+    user_name: ENV['GMAIL_SMTP_USER'],
+    password: ENV['GMAIL_SMTP_PASSWORD'],
+    address: "smtp.gmail.com",
+    port: 587,
+    enable_starttls_auto: true
+}
+</pre>
+<p>$ heroku config:add GMAIL_SMTP_USER=your_login@gmail.com</p>
+<p>$ heroku config:add GMAIL_SMTP_PASSWORD=your_password</p>
+
 <hr>
 <p>&copy; created in 2013 by <a href="http://tonydng.com" target="_blank">Tony Nguyen</a></p>

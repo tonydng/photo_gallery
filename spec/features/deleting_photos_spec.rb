@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 feature "Deleting photos" do 
-  let!(:gallery) { FactoryGirl.create(:gallery) }
-  let!(:photo) { FactoryGirl.create(:photo, gallery: gallery) }
+  let!(:user) { Factory(:confirmed_user) }
+  let!(:gallery) { Factory(:gallery, user: user) }
+  let!(:photo) { Factory(:photo, gallery: gallery, user: user) }
 
   before do 
+    sign_in_as!(user)
     visit root_path
     click_link gallery.name 
     click_link photo.name

@@ -3,7 +3,7 @@ require 'spec_helper'
 feature "Editing photos" do 
   let!(:user) { Factory(:confirmed_user)}
   let!(:gallery) { Factory(:gallery, user: user) }
-  # let!(:photo) {Factory(:photo, gallery: gallery, user: user) }
+  let!(:photo) {Factory(:photo, name: "test", gallery: gallery, user: user) }
 
   before do 
     
@@ -11,7 +11,7 @@ feature "Editing photos" do
 
     visit root_path
     click_link gallery.name
-    click_link photo.name
+    click_link "test"
     click_link "Edit Photo"
   end
 

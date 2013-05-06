@@ -1,17 +1,14 @@
 require 'spec_helper'
 
 feature "Editing Galleries" do 
+  let!(:user) { Factory(:confirmed_user) }
+  let!(:gallery) { Factory(:gallery, user: user) }
 
   before do 
-    gallery = FactoryGirl.create(:gallery, name: "Last vacation") 
-    user = FactoryGirl.create(:user)
-    user.confirm!
-    gallery.update_attribute(:user, user)
-
     sign_in_as!(user)
 
     visit root_path
-    click_link "Last vacation"
+    click_link gallery.name
     click_link 'Edit Gallery'
   end
   scenario "Updating a gallery" do 

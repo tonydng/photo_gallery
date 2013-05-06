@@ -7,6 +7,8 @@ feature "Signing in" do
 
 	scenario 'Signing in via confirmation' do 
 		open_email "user@example.com", with_subject: /Confirmation/
+		# p User.first.confirmation_token
+		# p current_email.body
 		click_first_link_in_email
 		message = "Your account was successfully confirmed. You are now signed in."
 		expect(page).to have_content(message)

@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 feature "Deleting galleries" do 
-  scenario "Deleting a gallery" do 
-    FactoryGirl.create(:gallery, name: "Last vacation")
+	let!(:user) { Factory(:confirmed_user) }
+	let!(:gallery) { Factory(:gallery, user: user) }
 
+  scenario "Deleting a gallery" do 
+  	sign_in_as!(user)
     visit root_path
-    click_link "Last vacation"
+    click_link gallery.name
     click_link "Delete Gallery"
 
     expect(page).to have_content("Gallery has been destroyed.")

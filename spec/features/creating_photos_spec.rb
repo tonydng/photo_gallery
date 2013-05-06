@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 feature 'Creating Photos' do 
+  let!(:user) {Factory(:confirmed_user) }
+  let!(:gallery) { Factory(:gallery, user: user) }
   before do 
-    FactoryGirl.create(:gallery, name: "Last vacation")
-    @user = FactoryGirl.create(:user, email: "user@example.com")
-    @user.confirm!
-    sign_in_as!(@user)
+    sign_in_as!(user)
     visit root_path
-    click_link "Last vacation"
+    click_link gallery.name 
     click_link "Add a photo"
   end
 
@@ -17,7 +16,7 @@ feature 'Creating Photos' do
     expect(page).to have_content("Photo has been created.")
 
     click_link "first photo"
-    expect(page).to have_content("Created by: #{@user.name} (#{@user.email})")
+    expect(page).to have_content("Created by: #{user.name} (#{user.email})")
   end
 
   scenario "Creating a photo without a name fails" do 
