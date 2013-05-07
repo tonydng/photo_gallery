@@ -13,6 +13,7 @@ gem 'carrierwave'
 gem 'rmagick', '2.13.2'
 gem 'fog', '1.10.1'
 gem 'devise', '2.2.3'
+# gem 'protected_attributes'
 # gem 'carrierwave_direct'
 # gem 'sidekiq'
 
