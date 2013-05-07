@@ -1,6 +1,6 @@
 <h3>Comments</h3>
 <div class="form-actions">
-	<% if !@comments.nil? %>
+	<% if @comments.exists? %>
 		<% @comments.each do |comment| %>
 			<div class="comment">
 			<h5>Commented by: <%= comment.user %></h5>
