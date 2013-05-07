@@ -10,11 +10,14 @@ PhotoGallery::Application.routes.draw do
 
   root to: 'galleries#index'
   match '/about', to: 'pages#about'
+
   resources :galleries do 
-    resources :photos do 
-      resources :comments
-    end
-  end  
+    resources :photos 
+  end 
+
+  resources :photos do 
+    resources :comments
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

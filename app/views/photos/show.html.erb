@@ -3,17 +3,29 @@
 
 <%= image_tag @photo.image_url %>
 
+<h3>Comments</h3>
+<div class="form-actions">
+	<% if @photo.comments.exists? %>
+		<%= render @photo.comments.select(&:persisted?) %>
+	<% else %>
+		There are no comments for this photo.
+	<% end %>
+</div>
+<%= render 'comments/form' %>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back to gallery")),
               @gallery, :class => 'btn'  %>
 
-  <% if (@gallery.user == current_user) || (!current_user.nil? && current_user.admin?) %>
-	  <%= link_to t('.edit', :default => t("helpers.links.edit photo")),
-	              [:edit, @gallery, @photo], :class => 'btn' %>
-	  <%= link_to t('.destroy', :default => t("helpers.links.delete photo")),
-	              [@gallery, @photo],
-	              :method => 'delete',
-	              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-	              :class => 'btn btn-danger' %>
+  <% unless @gallery.nil? %>           
+	  <% if (@gallery.user == current_user) || (!current_user.nil? && current_user.admin?) %>
+		  <%= link_to t('.edit', :default => t("helpers.links.edit photo")),
+		              [:edit, @gallery, @photo], :class => 'btn' %>
+		  <%= link_to t('.destroy', :default => t("helpers.links.delete photo")),
+		              [@gallery, @photo],
+		              :method => 'delete',
+		              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+		              :class => 'btn btn-danger' %>
+	  <% end %>
   <% end %>
 </div>

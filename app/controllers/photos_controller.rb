@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :set_gallery
-  before_filter :set_photo, except: [:index, :new, :create]
+  before_filter :set_photo, only: [:show, :edit, :update, :destroy]
   before_filter :correct_user, only: [:create, :edit, :update, :destroy]
   # GET /photos
   # GET /photos.json
@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-
+    @comment = @photo.comments.build
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @photo }
