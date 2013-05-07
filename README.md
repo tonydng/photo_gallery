@@ -56,7 +56,7 @@ ActionMailer::Base.smtp_settings = {
 
 <h3>Create the first admin on heroku</h3>
 <p>$ heroku run  console</p>
-<p>$ >admin = User.create(first_name: "first name", last_name: "last name", email: "email", password: "xxxxxxxxx", password_confirmation: "xxxxxx")</p>
+<p>$ >admin = User.create(name: "your name", email: "email", password: "xxxxxxxxx", password_confirmation: "xxxxxx")</p>
 <p>$ >admin.confirm!</p>
 <p>$ >admin.toggle!(:admin)</p>
 
