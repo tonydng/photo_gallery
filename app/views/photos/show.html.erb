@@ -1,3 +1,4 @@
+<% unless @photo.nil? %>
 <h1><%= @photo.name %></h1>
 <h5>Created by: <%= @photo.gallery.user %></h5>
 
@@ -22,3 +23,4 @@
 	  <% end %>
   <% end %>
 </div>
+<% end %>

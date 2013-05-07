@@ -1,7 +1,6 @@
-<h3>New Comment</h3>
 <%= form_for [@commentable, @comment] do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
-	<%= f.label :content %><br/>
+	<p><b><%= f.label :content, "New Comment" %></b></p>
 	<%= f.text_area :content, rows: 2 %>
 
 	<p><%= f.submit class: 'btn btn-primary' %></p>
