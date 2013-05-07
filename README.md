@@ -54,5 +54,14 @@ ActionMailer::Base.smtp_settings = {
 <p>$ heroku config:add GMAIL_SMTP_USER=your_login@gmail.com</p>
 <p>$ heroku config:add GMAIL_SMTP_PASSWORD=your_password</p>
 
+<h3>Create the first admin on heroku</h3>
+<p>$ heroku run  console</p>
+<p>$ >admin = User.create(first_name: "first name", last_name: "last name", email: "email", password: "xxxxxxxxx", password_confirmation: "xxxxxx")</p>
+<p>$ >admin.confirm!</p>
+<p>$ >admin.toggle!(:admin)</p>
+
+<p>View your heroku application</p>
+<p>$ heroku open</p>
+
 <hr>
 <p>&copy; created in 2013 by <a href="http://tonydng.com" target="_blank">Tony Nguyen</a></p>
