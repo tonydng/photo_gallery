@@ -1,6 +1,8 @@
 <h1><%= @photo.name %></h1>
 <h5>Created by: <%= @photo.gallery.user.name %> (<%= @photo.gallery.user.email %>)</h5>
 
+<%= image_tag @photo.image_url %>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back to gallery")),
               @gallery, :class => 'btn'  %>
