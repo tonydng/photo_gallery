@@ -1,13 +1,23 @@
 class CommentsController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :set_photo
+	before_filter :load_commentable
 	before_filter :correct_user
 
+	def index
+		@comments = @commentable.comments
+	end
+
+	def new
+		@comment = @commentable.comments.new
+	end
+
 	def create
-		@comment = @photo.comments.build(comment_params)
+		@comment = @commentable.comments.new(comment_params)
+		@comment.user = current_user
 		if @comment.save 
 			flash[:success] = "Comment has been created."
-			redirect_to [@photo.gallery, @photo]
+			redirect_to [@commentable.gallery, @commentable]
 		else
 			flash.now[:error] = "Comment has not been created."
 			render template: 'photos/show'
@@ -20,7 +30,12 @@ class CommentsController < ApplicationController
 		end
 
 		def comment_params
-			params.require(:comment).permit(:content, :user, :photo)
+			params.require(:comment).permit(:content, :commentable, :user)
+		end
+
+		def load_commentable
+			klass = [Photo].detect {|c| params["#{c.name.underscore}_id"] }
+			@commentable = klass.find(params["#{klass.name.underscore}_id"])
 		end
 
 		def correct_user

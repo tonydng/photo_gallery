@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  # attr_accessible :content, :photo_id, :user_id
+	validates :content, presence: true
+  belongs_to :commentable, polymorphic: true
   belongs_to :user
-  validates :content, presence: true
 end

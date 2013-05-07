@@ -16,7 +16,7 @@ feature 'Creating Photos' do
     expect(page).to have_content("Photo has been created.")
 
     click_link "first photo"
-    expect(page).to have_content("Created by: #{user.name} (#{user.email})")
+    expect(page).to have_content("Created by: #{user}")
   end
 
   scenario "Creating a photo without a name fails" do 

@@ -1,16 +1,9 @@
 <h1><%= @photo.name %></h1>
-<h5>Created by: <%= @photo.gallery.user.name %> (<%= @photo.gallery.user.email %>)</h5>
+<h5>Created by: <%= @photo.gallery.user %></h5>
 
 <%= image_tag @photo.image_url %>
 
-<h3>Comments</h3>
-<div class="form-actions">
-	<% if @photo.comments.exists? %>
-		<%= render @photo.comments.select(&:persisted?) %>
-	<% else %>
-		There are no comments for this photo.
-	<% end %>
-</div>
+<%= render 'comments/comments' %>
 <%= render 'comments/form' %>
 
 <div class="form-actions">

@@ -14,4 +14,9 @@ class User < ActiveRecord::Base
 
   has_many :galleries, dependent: :destroy
   has_many :photos, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  def to_s
+    "#{name} (#{admin? ? "Admin" : "User"})"
+  end
 end

@@ -1,0 +1,13 @@
+<h3>Comments</h3>
+<div class="form-actions">
+	<% if !@comments.nil? %>
+		<% @comments.each do |comment| %>
+			<div class="comment">
+			<h5>Commented by: <%= comment.user %></h5>
+			<%= simple_format(comment.content) %>
+		</div>
+		<% end %>
+	<% else %>
+		There are no comments for this photo. Please! make comments
+	<% end %>
+</div>
