@@ -4,7 +4,11 @@
 <div id="photos">
   <% for photo in @gallery.photos %>
     <div class="photo">
-      <%= link_to image_tag(photo.image_url(:thumb)), [@gallery, photo] if photo.image? %>
+      <% if photo.image? %>
+        <%= link_to image_tag(photo.image_url(:thumb)), [@gallery, photo] %>
+      <% else %>
+        <div class="image_placeholder"></div>
+      <% end %>
       <div class="name"><%= link_to photo.name, [@gallery, photo] if !photo.name.nil? %></div>
     </div>
   <% end %>
