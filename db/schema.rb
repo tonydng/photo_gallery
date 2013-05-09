@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507161452) do
+ActiveRecord::Schema.define(:version => 20130509141821) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(:version => 20130507161452) do
   end
 
   add_index "galleries", ["user_id"], :name => "index_galleries_on_user_id"
+
+  create_table "photo_watchers", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "photo_id"
+  end
 
   create_table "photos", :force => true do |t|
     t.string   "name"

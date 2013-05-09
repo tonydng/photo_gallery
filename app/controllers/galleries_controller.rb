@@ -42,7 +42,7 @@ class GalleriesController < ApplicationController
   # POST /galleries
   # POST /galleries.json
   def create
-    @gallery = current_user.galleries.build(gallery_params)
+    @gallery = current_user.galleries.build(params[:gallery])
     # @gallery.user = current_user
     respond_to do |format|
       if @gallery.save
@@ -62,7 +62,7 @@ class GalleriesController < ApplicationController
   def update
 
     respond_to do |format|
-      if @gallery.update_attributes(gallery_params)
+      if @gallery.update_attributes(params[:gallery])
         flash[:success] = "Gallery has been updated."
         format.html { redirect_to @gallery }
         format.json { head :no_content }
@@ -89,12 +89,12 @@ class GalleriesController < ApplicationController
     def set_gallery
       @gallery = Gallery.find(params[:id])
     end
-    # Use this method to whitelist the permissible parameters. Example:
-    # params.require(:person).permit(:name, :age)
-    # Also, you can specialize this method with per-user checking of permissible attributes.
-    def gallery_params
-      params.require(:gallery).permit(:name, :description, :user)
-    end
+    # # Use this method to whitelist the permissible parameters. Example:
+    # # params.require(:person).permit(:name, :age)
+    # # Also, you can specialize this method with per-user checking of permissible attributes.
+    # def gallery_params
+    #   params.require(:gallery).permit(:name, :description, :user)
+    # end
 
     def invalid_gallery
       logger.error "Attempt to access invalid gallery #{params[:id]}"

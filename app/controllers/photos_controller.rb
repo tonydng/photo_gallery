@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!, only: [:index, :show]
   before_filter :set_gallery
-  before_filter :set_photo, only: [:show, :edit, :update, :destroy]
+  before_filter :set_photo, only: [:show, :edit, :update, :destroy, :watch]
   before_filter :correct_user, only: [:create, :edit, :update, :destroy]
   # GET /photos
   # GET /photos.json
@@ -44,7 +44,8 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = @gallery.photos.build(photo_params)
+    @photo = @gallery.photos.build(params[:photo])
+    @photo.user = current_user
     respond_to do |format|
       if @photo.save
         flash[:success] = "Photo has been created."
@@ -63,7 +64,7 @@ class PhotosController < ApplicationController
   def update
 
     respond_to do |format|
-      if @photo.update_attributes(photo_params)
+      if @photo.update_attributes(params[:photo])
         flash[:success] = "Photo has been updated."
         format.html { redirect_to @gallery }
         format.json { head :no_content }
@@ -86,6 +87,18 @@ class PhotosController < ApplicationController
     end
   end
 
+  def watch
+    if @photo.watchers.exists?(current_user)
+      @photo.watchers -= [current_user]
+      flash[:error] = "You are no longer watching this photo."
+    else
+      @photo.watchers << current_user
+      flash[:success] = "You are now watching this photo."
+    end
+
+    redirect_to gallery_photo_path(@photo.gallery, @photo)
+  end
+
   private
     def set_gallery
       @gallery = Gallery.find(params[:gallery_id])
@@ -94,12 +107,12 @@ class PhotosController < ApplicationController
     def set_photo
       @photo = @gallery.photos.find(params[:id])
     end
-    # Use this method to whitelist the permissible parameters. Example:
-    # params.require(:person).permit(:name, :age)
-    # Also, you can specialize this method with per-user checking of permissible attributes.
-    def photo_params
-      params.require(:photo).permit(:galery, :image, :name, :user)
-    end
+    # # Use this method to whitelist the permissible parameters. Example:
+    # # params.require(:person).permit(:name, :age)
+    # # Also, you can specialize this method with per-user checking of permissible attributes.
+    # def photo_params
+    #   params.require(:photo).permit(:galery, :image, :name, :user)
+    # end
 
     def correct_user
       unless @gallery.user == current_user

@@ -5,14 +5,20 @@ PhotoGallery::Application.routes.draw do
     resources :users
   end
 
-  devise_for :users, :controllers => {:registrations => "users/registrations", 
-                                      :passwords => "users/passwords"}
+  # devise_for :users, :controllers => {:registrations => "users/registrations", 
+  #                                     :passwords => "users/passwords"}
 
+  devise_for :users
+  
   root to: 'galleries#index'
   match '/about', to: 'pages#about'
 
   resources :galleries do 
-    resources :photos 
+    resources :photos do 
+      member do 
+        post :watch
+      end
+    end
   end 
 
   resources :photos do 

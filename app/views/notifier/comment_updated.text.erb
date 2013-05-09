@@ -1,0 +1,10 @@
+Hello!
+
+<%= @photo.name %> for <%= @gallery.name %> has been updated.
+
+<%= @comment.user.email %> wrote:
+
+<%= @comment.content %>
+
+You can view this photo online by going to:
+<%= gallery_photo_url(@photo.gallery, @photo) %>
