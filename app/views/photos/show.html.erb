@@ -9,8 +9,10 @@
 <hr>
 <span id="watchers">
 	<%= toggle_watching_button %>
-	<strong>Watchers:</strong>
-	<%= @photo.watchers.to_sentence %>
+	<div class="form-actions">
+		<strong>Watchers:</strong>
+		<%= @photo.watchers.to_sentence %>
+	</div>
 </span>
 <%= render 'comments/comments' %>
 <%= render 'comments/form' %>
