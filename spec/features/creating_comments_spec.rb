@@ -14,7 +14,7 @@ feature 'Creating Comments' do
 
 	scenario "Creating a comment" do 
 		click_link photo.name 
-		fill_in "Content", with: "lovely photo"
+		fill_in "New Comment", with: "lovely photo"
 		click_button "Create Comment"
 		expect(page).to have_content("Comment has been created.")
 		expect(page).to have_content("lovely photo")
@@ -33,7 +33,7 @@ feature 'Creating Comments' do
 		visit root_path
 		click_link gallery.name
 		click_link photo.name
-		fill_in "Content", with: "My photo looks the best on this website"
+		fill_in "New Comment", with: "My photo looks the best on this website"
 		click_button "Create Comment"
 		message ="You are not authorized to comment for your own photo"
 		expect(page).to have_content(message)
