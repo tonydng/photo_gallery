@@ -18,6 +18,7 @@ gem 'devise', '2.2.3'
 # gem 'sidekiq'
 
 group :development, :test do 
+  gem 'gmail'
   gem 'sqlite3', '1.3.7'
   gem 'rspec-rails', '2.13.0'
 end
