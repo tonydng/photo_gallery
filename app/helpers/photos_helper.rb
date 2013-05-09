@@ -5,6 +5,7 @@ module PhotosHelper
 		else
 			"Watch this photo"
 		end
-		button_to(text, watch_gallery_photo_path(@photo.gallery, @photo))
+		button_to(text, watch_gallery_photo_path(@photo.gallery, @photo),
+			class: 'btn btn-primary')
 	end
 end

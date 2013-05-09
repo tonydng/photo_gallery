@@ -22,9 +22,9 @@ feature 'Gmail' do
 		click_button "Create Comment"
 		expect(page).to have_content("Comment has been created.")
 
-		expect(photo_gallery_emails.count).to eql(1)
+		expect(photo_gallery_emails.count).not_to eql(0)
 		email = photo_gallery_emails.first
-		subject = "[Photo Gallery] #{gallery.name} #{photo.name}"
+		subject = "[Photo Gallery] #{gallery.name} - #{photo.name}"
 		expect(email.subject).to eql(subject)
 		clear_photo_gallery_emails!
 	end

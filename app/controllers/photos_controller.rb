@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_user!, only: [:index, :show]
+  before_filter :authenticate_user!, except: [:index, :show]
   before_filter :set_gallery
   before_filter :set_photo, only: [:show, :edit, :update, :destroy, :watch]
   before_filter :correct_user, only: [:create, :edit, :update, :destroy]
@@ -17,6 +17,7 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @photo = @gallery.photos.find(params[:id])
     @commentable = @photo
     @comments = @commentable.comments
     @comment = Comment.new

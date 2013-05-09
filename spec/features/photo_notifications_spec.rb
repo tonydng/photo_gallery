@@ -17,7 +17,6 @@ feature 'Photo Notifications' do
 		click_link photo.name 
 		fill_in "New Comment", with: "it look greate"
 		click_button "Create Comment"
-		p photo.watchers
 		email = find_email!(owner.email)
 		subject = "[Photo Gallery] #{gallery.name} - #{photo.name}"
 		expect(email.subject).to have_content(subject)
