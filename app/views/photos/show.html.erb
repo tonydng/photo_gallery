@@ -6,7 +6,7 @@
 <% else %>
 	<div class="image_placeholder"></div>
 <% end %>
-<hr>
+<p>
 <span id="watchers">
 	<%= toggle_watching_button %>
 	<div class="form-actions">
@@ -14,6 +14,7 @@
 		<%= @photo.watchers.to_sentence %>
 	</div>
 </span>
+</p>
 <%= render 'comments/comments' %>
 <%= render 'comments/form' %>
 
