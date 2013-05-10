@@ -43,7 +43,7 @@ class GalleriesController < ApplicationController
   # POST /galleries.json
   def create
     @gallery = current_user.galleries.build(params[:gallery])
-    # @gallery.user = current_user
+    @gallery.user = current_user
     respond_to do |format|
       if @gallery.save
         flash[:success] = "Gallery has been created."

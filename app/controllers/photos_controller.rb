@@ -49,6 +49,7 @@ class PhotosController < ApplicationController
     @photo.user = current_user
     respond_to do |format|
       if @photo.save
+        @photo.watchers << @photo.user
         flash[:success] = "Photo has been created."
         format.html { redirect_to @gallery }
         format.json { render json: @gallery, status: :created, location: @photo }
