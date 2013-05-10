@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
 		@comment = @commentable.comments.new(params[:comment])
 		@comment.user = current_user
 		if @comment.save 
+			@comment.watchers << @comment.user
 			flash[:success] = "Comment has been created."
 			redirect_to [@commentable.gallery, @commentable]
 		else

@@ -4,9 +4,9 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
-  after_create :creator_watches_photo
+  # after_create :creator_watches_photo
 
-  def creator_watches_photo
-  	commentable.watchers << user
-  end
+  # def creator_watches_photo
+  # 	commentable.watchers << user
+  # end
 end
