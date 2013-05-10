@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :name
 
-  validates :name, presence: true, unless: :guest_user?
+  validates :name, presence: true
 
   has_many :galleries, dependent: :destroy
   has_many :photos, dependent: :destroy
