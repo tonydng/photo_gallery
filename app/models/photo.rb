@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
 
   belongs_to :gallery
   belongs_to :user
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_and_belongs_to_many :watchers, join_table: "photo_watchers",
   																		class_name: "User"
   
