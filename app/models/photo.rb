@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
   attr_accessible :image, :name
-  # after_create :creator_watches_me
+  after_create :creator_watches_me
 
   belongs_to :gallery
   belongs_to :user
@@ -12,9 +12,9 @@ class Photo < ActiveRecord::Base
   validates :name, presence: true
   mount_uploader :image, ImageUploader
 
-  # def creator_watches_me
-  # 	unless self.watchers.include?(user) 
-  # 		self.watchers << user if user
-  # 	end
-  # end
+  def creator_watches_me
+  	unless self.watchers.include?(user) 
+  		self.watchers << user if user
+  	end
+  end
 end
