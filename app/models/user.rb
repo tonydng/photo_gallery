@@ -16,10 +16,6 @@ class User < ActiveRecord::Base
   has_many :photos, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
-  def self.new_guest
-    new { |u| u.guest_user = true }
-  end
-
   def to_s
     "#{name} (#{admin? ? "Admin" : "User"})"
   end
