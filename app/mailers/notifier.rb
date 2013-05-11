@@ -8,7 +8,9 @@ class Notifier < ActionMailer::Base
 		@photo = comment.commentable
 		@gallery = @photo.gallery
 		subject = "[Photo Gallery] #{@gallery.name} - #{@photo.name}"
-		mail(to: user.email, subject: subject)
+		mail(to: user.email, subject: subject,
+					reply_to: "Photo Gallery <tonydng+" +
+					"#{@gallery.id}+#{@photo.id}@gmail.com>")
 	end
 	
 end

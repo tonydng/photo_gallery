@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :set_photo
 	before_filter :load_commentable
-	before_filter :correct_user
+	# before_filter :correct_user
 
 	def index
 		@comments = @commentable.comments
@@ -38,10 +38,10 @@ class CommentsController < ApplicationController
 			@commentable = klass.find(params["#{klass.name.underscore}_id"])
 		end
 
-		def correct_user
-			if @photo.gallery.user == current_user
-				flash[:error] = "You are not authorized to comment for your own photo"
-				redirect_to [@photo.gallery, @photo]
-			end
-		end
+		# def correct_user
+		# 	if @photo.gallery.user == current_user
+		# 		flash[:error] = "You are not authorized to comment for your own photo"
+		# 		redirect_to [@photo.gallery, @photo]
+		# 	end
+		# end
 end

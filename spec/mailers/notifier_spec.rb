@@ -22,8 +22,13 @@ describe Notifier do
 			expect(email.to).to include(owner.email)
 			title = "#{photo.name} for #{gallery.name} has been updated."
 			expect(email.body).to include(title)
-			expect(email.body).to include("#{comment.user.email} wrote:")
+			expect(email.body).to include("#{comment.user} wrote:")
 			expect(email.body).to include(comment.content)
+		end
+
+		it "correctly sets the Reply-To" do 
+			address = "tonydng+#{gallery.id}+#{photo.id}@gmail.com"
+			expect(email.reply_to).to eql([address])
 		end
 	end
 end
