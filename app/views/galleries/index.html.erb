@@ -2,7 +2,18 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+<% if user_signed_in? %>
+  <%= link_to "New Gallery", new_gallery_path, :class => 'btn btn-primary' %>
+<% else %>
+<p class="form-actions">
+<a href="https://github.com/tonydng/photo_gallery">This Photo Gallery</a> is a Rails project in version 3.2.13 with <a href="https://github.com/tonydng/photo_gallery/tree/master/spec">full integration test</a>. The main idea of this application is that it can let a user to sign up, login, create (read, update, delete) his/her own gallery, and upload photos to this gallery. Also it can let a user to make comments about other people's photos. Beside serving for PC, this website can be viewed from any mobile phones/ipads without spending time to resize the browser window because it is a responsive website.
 
+Give it a try by using <b>newguest9@gmail.com</b> as a <em style="color:red">login</em> and
+<b>password</b> as a <em style="color:red">password</em> to login the application.
+</p>
+<p><%= link_to "Try it for free!", new_user_registration_path, 
+      class: 'btn btn-large btn-primary' %></p>
+<% end %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,15 +32,3 @@
     <% end %>
   </tbody>
 </table>
-<% if user_signed_in? %>
-  <%= link_to "New Gallery", new_gallery_path, :class => 'btn btn-primary' %>
-<% else %>
-<p class="form-actions">
-<a href="https://github.com/tonydng/photo_gallery">This Photo Gallery</a> is a Rails project in version 3.2.13 with <a href="https://github.com/tonydng/photo_gallery/tree/master/spec">full integration test</a>. The main idea of this application is that it can let a user to sign up, login, create (read, update, delete) his/her own gallery, and upload photos to this gallery. Also it can let a user to make comments about other people's photos. Beside serving for PC, this website can be viewed from any mobile phones/ipads without spending time to resize the browser window because it is a responsive website.
-
-Give it a try by using <b>newguest9@gmail.com</b> as a <em style="color:red">login</em> and
-<b>password</b> as a <em style="color:red">password</em> to login the application.
-</p>
-<p><%= link_to "Try it for free!", new_user_registration_path, 
-      class: 'btn btn-large btn-primary' %></p>
-<% end %>
