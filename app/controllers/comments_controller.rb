@@ -17,11 +17,11 @@ class CommentsController < ApplicationController
 		@comment.user = current_user
 		if @comment.save 
 			flash[:success] = "Comment has been created."
-			redirect_to [@commentable.gallery, @commentable]
 		else
 			flash.now[:error] = "Comment has not been created."
 			render template: 'photos/show'
 		end
+		redirect_to [@commentable.gallery, @commentable]
 	end
 
 	private
