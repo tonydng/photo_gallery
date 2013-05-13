@@ -24,6 +24,7 @@
 
   <%# unless @gallery.nil? %>           
 	  <%# if (@gallery.user == current_user) || (!current_user.nil? && current_user.admin?) %>
+
 		  <%= link_to t('.edit', :default => t("helpers.links.edit photo")),
 		              [:edit, @gallery, @photo], :class => 'btn' %>
 		  <%= link_to t('.destroy', :default => t("helpers.links.delete photo")),

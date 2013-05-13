@@ -12,7 +12,7 @@ feature "Signing in" do
 		click_first_link_in_email
 		message = "Your account was successfully confirmed. You are now signed in."
 		expect(page).to have_content(message)
-		expect(page).to have_content("Signed in as #{@user.name} (#{@user.email})")
+		expect(page).to have_content("Signed in as #{@user} ")
 	end
 
 	scenario "Signing in via form" do 
@@ -23,6 +23,6 @@ feature "Signing in" do
 		fill_in "Password", with: "password"
 		click_button "Sign in"
 		expect(page).to have_content("Signed in successfully.")
-		expect(page).to have_content("Signed in as #{@user.name} (#{@user.email})")
+		expect(page).to have_content("Signed in as #{@user}")
 	end
 end
