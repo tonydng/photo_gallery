@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :name
+  attr_accessible :name, :email, :password, :admin, as: :admin
 
   validates :name, presence: true
 
@@ -17,6 +18,6 @@ class User < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
 
   def to_s
-    "#{name} (#{admin? ? "Admin" : "User"})"
+    "#{name} <#{email}> (#{admin? ? "Admin" : "User"})"
   end
 end

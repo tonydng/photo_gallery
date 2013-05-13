@@ -9,7 +9,7 @@ feature 'Editing a user' do
 		visit root_path
 		click_link "Admin"
 		click_link "Users"
-		click_link user.email
+		click_link user
 		click_link "Edit User"
 	end
 
@@ -18,8 +18,15 @@ feature 'Editing a user' do
 		fill_in "Email", with: "newguy@example.com"
 		click_button "Update User"
 		expect(page).to have_content("User has been updated.")
-		expect(page).to have_content("newguy@example.com")
-		expect(page).not_to have_content(user.email)
+		expect(page).to have_content("New Guy <newguy@example.com> (User)")
+		expect(page).not_to have_content(user.name)
+	end
+
+	scenario "Toggling user's admin ability" do 
+		check "Admin"
+		click_button "Update User"
+		expect(page).to have_content("User has been updated.")
+		expect(page).to have_content("#{user.name} <#{user.email}> (Admin)")
 	end
 
 	scenario "Updating with an empty name fails" do 
