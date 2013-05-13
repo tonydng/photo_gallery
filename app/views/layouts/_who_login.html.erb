@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  Signed in as <%= current_user.name %> (<%= current_user.email %>)
+  Signed in as <%= current_user %>
   <% if current_user.admin? %>
   	<%= link_to "Admin", admin_root_path %>
   <% end %>
