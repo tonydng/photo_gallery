@@ -1,5 +1,6 @@
 <% title(@gallery.name, "Galleries") %>
 <h1><%= @gallery.name  %></h1>
+<h5>Created by: <%= @gallery.user %></h5>
 
 <div id="photos">
   <% for photo in @gallery.photos %>
