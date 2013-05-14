@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
 			flash[:success] = "Comment has been created."
 			redirect_to [@commentable.gallery, @commentable]
 		else
-			flash[:error] = "Comment has not been created."
+			flash[:error] = "Comment can't be blank; therefore, it has not been created."
 			redirect_to [@commentable.gallery, @commentable] #'photos/show'
 		end
 	end

@@ -23,7 +23,8 @@ feature 'Creating Comments' do
 	scenario "Creating an invalid comment fails" do 
 		click_link photo.name
 		click_button "Create Comment"
-		expect(page).to have_content("Comment has not been created.")
+		message = "Comment can't be blank; therefore, it has not been created."
+		expect(page).to have_content(message)
 		# expect(page).to have_content("can't be blank")
 	end
 
